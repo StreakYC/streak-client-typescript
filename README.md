@@ -30,9 +30,9 @@ const client = new Streak({
   password: process.env['STREAK_PASSWORD'], // This is the default and can be omitted
 });
 
-const pipeline = await client.pipelines.create({ name: 'REPLACE_ME', teamKey: 'REPLACE_ME' });
+const response = await client.users.retrieveCurrent();
 
-console.log(pipeline.teamWide);
+console.log(response.creationTimestamp);
 ```
 
 ### Request & Response types
@@ -48,8 +48,7 @@ const client = new Streak({
   password: process.env['STREAK_PASSWORD'], // This is the default and can be omitted
 });
 
-const params: Streak.PipelineCreateParams = { name: 'REPLACE_ME', teamKey: 'REPLACE_ME' };
-const pipeline: Streak.PipelineCreateResponse = await client.pipelines.create(params);
+const response: Streak.UserRetrieveCurrentResponse = await client.users.retrieveCurrent();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -62,17 +61,15 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const pipeline = await client.pipelines
-  .create({ name: 'REPLACE_ME', teamKey: 'REPLACE_ME' })
-  .catch(async (err) => {
-    if (err instanceof Streak.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
+const response = await client.users.retrieveCurrent().catch(async (err) => {
+  if (err instanceof Streak.APIError) {
+    console.log(err.status); // 400
+    console.log(err.name); // BadRequestError
+    console.log(err.headers); // {server: 'nginx', ...}
+  } else {
+    throw err;
+  }
+});
 ```
 
 Error codes are as follows:
@@ -104,7 +101,7 @@ const client = new Streak({
 });
 
 // Or, configure per-request:
-await client.pipelines.create({ name: 'REPLACE_ME', teamKey: 'REPLACE_ME' }, {
+await client.users.retrieveCurrent({
   maxRetries: 5,
 });
 ```
@@ -121,7 +118,7 @@ const client = new Streak({
 });
 
 // Override per-request:
-await client.pipelines.create({ name: 'REPLACE_ME', teamKey: 'REPLACE_ME' }, {
+await client.users.retrieveCurrent({
   timeout: 5 * 1000,
 });
 ```
@@ -144,15 +141,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Streak();
 
-const response = await client.pipelines.create({ name: 'REPLACE_ME', teamKey: 'REPLACE_ME' }).asResponse();
+const response = await client.users.retrieveCurrent().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: pipeline, response: raw } = await client.pipelines
-  .create({ name: 'REPLACE_ME', teamKey: 'REPLACE_ME' })
-  .withResponse();
+const { data: response, response: raw } = await client.users.retrieveCurrent().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(pipeline.teamWide);
+console.log(response.creationTimestamp);
 ```
 
 ### Logging
@@ -232,7 +227,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.pipelines.create({
+client.users.retrieveCurrent({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
