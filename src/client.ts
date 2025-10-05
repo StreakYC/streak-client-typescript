@@ -16,18 +16,11 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Files } from './resources/files';
-import { Newsfeed } from './resources/newsfeed';
-import { SearchName } from './resources/search-name';
-import { SearchQuery } from './resources/search-query';
-import { Snippets } from './resources/snippets';
-import { Threads } from './resources/threads';
 import { UserRetrieveCurrentResponse, Users } from './resources/users';
-import { Boxes } from './resources/boxes/boxes';
-import { Pipelines } from './resources/pipelines/pipelines';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
+import { toBase64 } from './internal/utils/base64';
 import { readEnv } from './internal/utils/env';
 import {
   type LogLevel,
@@ -37,6 +30,12 @@ import {
   parseLogLevel,
 } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
+
+const environments = {
+  production: 'https://api.streak.com/api/v1',
+  environment_1: 'https://api.streak.com/api/v2',
+};
+type Environment = keyof typeof environments;
 
 export interface ClientOptions {
   /**
@@ -48,6 +47,15 @@ export interface ClientOptions {
    * Defaults to process.env['STREAK_PASSWORD'].
    */
   password?: string | undefined;
+
+  /**
+   * Specifies the environment to use for the API.
+   *
+   * Each environment maps to a different base URL:
+   * - `production` corresponds to `https://api.streak.com/api/v1`
+   * - `environment_1` corresponds to `https://api.streak.com/api/v2`
+   */
+  environment?: Environment | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -142,6 +150,7 @@ export class Streak {
    *
    * @param {string | undefined} [opts.username=process.env['STREAK_USERNAME'] ?? undefined]
    * @param {string | undefined} [opts.password=process.env['STREAK_PASSWORD'] ?? undefined]
+   * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
    * @param {string} [opts.baseURL=process.env['STREAK_BASE_URL'] ?? https://api.streak.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -171,10 +180,17 @@ export class Streak {
       username,
       password,
       ...opts,
-      baseURL: baseURL || `https://api.streak.com/api/v1`,
+      baseURL,
+      environment: opts.environment ?? 'production',
     };
 
-    this.baseURL = options.baseURL!;
+    if (baseURL && opts.environment) {
+      throw new Errors.StreakError(
+        'Ambiguous URL; The `baseURL` option (or STREAK_BASE_URL env var) and the `environment` option are given. If you want to use the environment you must pass baseURL: null',
+      );
+    }
+
+    this.baseURL = options.baseURL || environments[options.environment || 'production'];
     this.timeout = options.timeout ?? Streak.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
@@ -201,7 +217,8 @@ export class Streak {
   withOptions(options: Partial<ClientOptions>): this {
     const client = new (this.constructor as any as new (props: ClientOptions) => typeof this)({
       ...this._options,
-      baseURL: this.baseURL,
+      environment: options.environment ? options.environment : undefined,
+      baseURL: options.environment ? undefined : this.baseURL,
       maxRetries: this.maxRetries,
       timeout: this.timeout,
       logger: this.logger,
@@ -219,7 +236,7 @@ export class Streak {
    * Check whether the base URL is set to its default.
    */
   #baseURLOverridden(): boolean {
-    return this.baseURL !== 'https://api.streak.com/api/v1';
+    return this.baseURL !== environments[this._options.environment || 'production'];
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
@@ -228,6 +245,20 @@ export class Streak {
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
     return;
+  }
+
+  protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    if (!this.username) {
+      return undefined;
+    }
+
+    if (!this.password) {
+      return undefined;
+    }
+
+    const credentials = `${this.username}:${this.password}`;
+    const Authorization = `Basic ${toBase64(credentials)}`;
+    return buildHeaders([{ Authorization }]);
   }
 
   /**
@@ -667,6 +698,7 @@ export class Streak {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
       },
+      await this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
       options.headers,
@@ -734,44 +766,12 @@ export class Streak {
   static toFile = Uploads.toFile;
 
   users: API.Users = new API.Users(this);
-  pipelines: API.Pipelines = new API.Pipelines(this);
-  boxes: API.Boxes = new API.Boxes(this);
-  searchQuery: API.SearchQuery = new API.SearchQuery(this);
-  searchName: API.SearchName = new API.SearchName(this);
-  files: API.Files = new API.Files(this);
-  threads: API.Threads = new API.Threads(this);
-  snippets: API.Snippets = new API.Snippets(this);
-  newsfeed: API.Newsfeed = new API.Newsfeed(this);
 }
 
 Streak.Users = Users;
-Streak.Pipelines = Pipelines;
-Streak.Boxes = Boxes;
-Streak.SearchQuery = SearchQuery;
-Streak.SearchName = SearchName;
-Streak.Files = Files;
-Streak.Threads = Threads;
-Streak.Snippets = Snippets;
-Streak.Newsfeed = Newsfeed;
 
 export declare namespace Streak {
   export type RequestOptions = Opts.RequestOptions;
 
   export { Users as Users, type UserRetrieveCurrentResponse as UserRetrieveCurrentResponse };
-
-  export { Pipelines as Pipelines };
-
-  export { Boxes as Boxes };
-
-  export { SearchQuery as SearchQuery };
-
-  export { SearchName as SearchName };
-
-  export { Files as Files };
-
-  export { Threads as Threads };
-
-  export { Snippets as Snippets };
-
-  export { Newsfeed as Newsfeed };
 }

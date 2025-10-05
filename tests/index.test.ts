@@ -355,6 +355,24 @@ describe('instantiate client', () => {
       expect(client.baseURL).toEqual('https://api.streak.com/api/v1');
     });
 
+    test('env variable with environment', () => {
+      process.env['STREAK_BASE_URL'] = 'https://example.com/from_env';
+
+      expect(
+        () => new Streak({ username: 'My Username', password: 'My Password', environment: 'production' }),
+      ).toThrowErrorMatchingInlineSnapshot(
+        `"Ambiguous URL; The \`baseURL\` option (or STREAK_BASE_URL env var) and the \`environment\` option are given. If you want to use the environment you must pass baseURL: null"`,
+      );
+
+      const client = new Streak({
+        username: 'My Username',
+        password: 'My Password',
+        baseURL: null,
+        environment: 'production',
+      });
+      expect(client.baseURL).toEqual('https://api.streak.com/api/v1');
+    });
+
     test('in request options', () => {
       const client = new Streak({ username: 'My Username', password: 'My Password' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
