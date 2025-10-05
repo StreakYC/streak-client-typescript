@@ -16,44 +16,18 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { FileRetrieveContentsResponse, FileRetrieveResponse, Files } from './resources/files';
-import { Newsfeed, NewsfeedRetrieveParams, NewsfeedRetrieveResponse } from './resources/newsfeed';
-import { SearchName, SearchNameRetrieveParams, SearchNameRetrieveResponse } from './resources/search-name';
-import { SearchQuery, SearchQueryPerformSearchParams } from './resources/search-query';
-import {
-  SnippetDeleteResponse,
-  SnippetListResponse,
-  SnippetRetrieveResponse,
-  SnippetUpdateParams,
-  SnippetUpdateResponse,
-  Snippets,
-} from './resources/snippets';
-import { ThreadDeleteResponse, ThreadRetrieveResponse, Threads } from './resources/threads';
-import { UserRetrieveCurrentResponse, UserRetrieveResponse, Users } from './resources/users';
-import {
-  BoxDeleteResponse,
-  BoxGetNewsfeedParams,
-  BoxGetNewsfeedResponse,
-  BoxListFilesResponse,
-  BoxListThreadsResponse,
-  BoxRetrieveResponse,
-  BoxUpdateMultipleFieldsParams,
-  BoxUpdateMultipleFieldsResponse,
-  BoxUpdateParams,
-  BoxUpdateResponse,
-  Boxes,
-} from './resources/boxes/boxes';
-import {
-  PipelineDeleteResponse,
-  PipelineListParams,
-  PipelineUpdateParams,
-  PipelineUpdateResponse,
-  Pipelines,
-} from './resources/pipelines/pipelines';
+import { Files } from './resources/files';
+import { Newsfeed } from './resources/newsfeed';
+import { SearchName } from './resources/search-name';
+import { SearchQuery } from './resources/search-query';
+import { Snippets } from './resources/snippets';
+import { Threads } from './resources/threads';
+import { UserRetrieveCurrentResponse, Users } from './resources/users';
+import { Boxes } from './resources/boxes/boxes';
+import { Pipelines } from './resources/pipelines/pipelines';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
-import { toBase64 } from './internal/utils/base64';
 import { readEnv } from './internal/utils/env';
 import {
   type LogLevel,
@@ -254,20 +228,6 @@ export class Streak {
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
     return;
-  }
-
-  protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    if (!this.username) {
-      return undefined;
-    }
-
-    if (!this.password) {
-      return undefined;
-    }
-
-    const credentials = `${this.username}:${this.password}`;
-    const Authorization = `Basic ${toBase64(credentials)}`;
-    return buildHeaders([{ Authorization }]);
   }
 
   /**
@@ -707,7 +667,6 @@ export class Streak {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
       },
-      await this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
       options.headers,
@@ -798,69 +757,21 @@ Streak.Newsfeed = Newsfeed;
 export declare namespace Streak {
   export type RequestOptions = Opts.RequestOptions;
 
-  export {
-    Users as Users,
-    type UserRetrieveResponse as UserRetrieveResponse,
-    type UserRetrieveCurrentResponse as UserRetrieveCurrentResponse,
-  };
+  export { Users as Users, type UserRetrieveCurrentResponse as UserRetrieveCurrentResponse };
 
-  export {
-    Pipelines as Pipelines,
-    type PipelineUpdateResponse as PipelineUpdateResponse,
-    type PipelineDeleteResponse as PipelineDeleteResponse,
-    type PipelineUpdateParams as PipelineUpdateParams,
-    type PipelineListParams as PipelineListParams,
-  };
+  export { Pipelines as Pipelines };
 
-  export {
-    Boxes as Boxes,
-    type BoxRetrieveResponse as BoxRetrieveResponse,
-    type BoxUpdateResponse as BoxUpdateResponse,
-    type BoxDeleteResponse as BoxDeleteResponse,
-    type BoxGetNewsfeedResponse as BoxGetNewsfeedResponse,
-    type BoxListFilesResponse as BoxListFilesResponse,
-    type BoxListThreadsResponse as BoxListThreadsResponse,
-    type BoxUpdateMultipleFieldsResponse as BoxUpdateMultipleFieldsResponse,
-    type BoxUpdateParams as BoxUpdateParams,
-    type BoxGetNewsfeedParams as BoxGetNewsfeedParams,
-    type BoxUpdateMultipleFieldsParams as BoxUpdateMultipleFieldsParams,
-  };
+  export { Boxes as Boxes };
 
-  export {
-    SearchQuery as SearchQuery,
-    type SearchQueryPerformSearchParams as SearchQueryPerformSearchParams,
-  };
+  export { SearchQuery as SearchQuery };
 
-  export {
-    SearchName as SearchName,
-    type SearchNameRetrieveResponse as SearchNameRetrieveResponse,
-    type SearchNameRetrieveParams as SearchNameRetrieveParams,
-  };
+  export { SearchName as SearchName };
 
-  export {
-    Files as Files,
-    type FileRetrieveResponse as FileRetrieveResponse,
-    type FileRetrieveContentsResponse as FileRetrieveContentsResponse,
-  };
+  export { Files as Files };
 
-  export {
-    Threads as Threads,
-    type ThreadRetrieveResponse as ThreadRetrieveResponse,
-    type ThreadDeleteResponse as ThreadDeleteResponse,
-  };
+  export { Threads as Threads };
 
-  export {
-    Snippets as Snippets,
-    type SnippetRetrieveResponse as SnippetRetrieveResponse,
-    type SnippetUpdateResponse as SnippetUpdateResponse,
-    type SnippetListResponse as SnippetListResponse,
-    type SnippetDeleteResponse as SnippetDeleteResponse,
-    type SnippetUpdateParams as SnippetUpdateParams,
-  };
+  export { Snippets as Snippets };
 
-  export {
-    Newsfeed as Newsfeed,
-    type NewsfeedRetrieveResponse as NewsfeedRetrieveResponse,
-    type NewsfeedRetrieveParams as NewsfeedRetrieveParams,
-  };
+  export { Newsfeed as Newsfeed };
 }
