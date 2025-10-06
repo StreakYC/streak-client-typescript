@@ -25,9 +25,7 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Streak from 'streak';
 
-const client = new Streak({
-  apiKey: 'My API Key',
-});
+const client = new Streak();
 
 const response = await client.users.retrieveCurrent();
 
@@ -42,9 +40,7 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Streak from 'streak';
 
-const client = new Streak({
-  apiKey: 'My API Key',
-});
+const client = new Streak();
 
 const response: Streak.UserRetrieveCurrentResponse = await client.users.retrieveCurrent();
 ```
