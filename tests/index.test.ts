@@ -23,8 +23,7 @@ describe('instantiate client', () => {
     const client = new Streak({
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
-      username: 'My Username',
-      password: 'My Password',
+      apiKey: 'My API Key',
     });
 
     test('they are used in the request', async () => {
@@ -88,19 +87,14 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new Streak({
-        logger: logger,
-        logLevel: 'debug',
-        username: 'My Username',
-        password: 'My Password',
-      });
+      const client = new Streak({ logger: logger, logLevel: 'debug', apiKey: 'My API Key' });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).toHaveBeenCalled();
     });
 
     test('default logLevel is warn', async () => {
-      const client = new Streak({ username: 'My Username', password: 'My Password' });
+      const client = new Streak({ apiKey: 'My API Key' });
       expect(client.logLevel).toBe('warn');
     });
 
@@ -113,12 +107,7 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new Streak({
-        logger: logger,
-        logLevel: 'info',
-        username: 'My Username',
-        password: 'My Password',
-      });
+      const client = new Streak({ logger: logger, logLevel: 'info', apiKey: 'My API Key' });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).not.toHaveBeenCalled();
@@ -134,7 +123,7 @@ describe('instantiate client', () => {
       };
 
       process.env['STREAK_LOG'] = 'debug';
-      const client = new Streak({ logger: logger, username: 'My Username', password: 'My Password' });
+      const client = new Streak({ logger: logger, apiKey: 'My API Key' });
       expect(client.logLevel).toBe('debug');
 
       await forceAPIResponseForClient(client);
@@ -151,7 +140,7 @@ describe('instantiate client', () => {
       };
 
       process.env['STREAK_LOG'] = 'not a log level';
-      const client = new Streak({ logger: logger, username: 'My Username', password: 'My Password' });
+      const client = new Streak({ logger: logger, apiKey: 'My API Key' });
       expect(client.logLevel).toBe('warn');
       expect(warnMock).toHaveBeenCalledWith(
         'process.env[\'STREAK_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
@@ -168,12 +157,7 @@ describe('instantiate client', () => {
       };
 
       process.env['STREAK_LOG'] = 'debug';
-      const client = new Streak({
-        logger: logger,
-        logLevel: 'off',
-        username: 'My Username',
-        password: 'My Password',
-      });
+      const client = new Streak({ logger: logger, logLevel: 'off', apiKey: 'My API Key' });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).not.toHaveBeenCalled();
@@ -189,12 +173,7 @@ describe('instantiate client', () => {
       };
 
       process.env['STREAK_LOG'] = 'not a log level';
-      const client = new Streak({
-        logger: logger,
-        logLevel: 'debug',
-        username: 'My Username',
-        password: 'My Password',
-      });
+      const client = new Streak({ logger: logger, logLevel: 'debug', apiKey: 'My API Key' });
       expect(client.logLevel).toBe('debug');
       expect(warnMock).not.toHaveBeenCalled();
     });
@@ -205,8 +184,7 @@ describe('instantiate client', () => {
       const client = new Streak({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
-        username: 'My Username',
-        password: 'My Password',
+        apiKey: 'My API Key',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo');
     });
@@ -215,8 +193,7 @@ describe('instantiate client', () => {
       const client = new Streak({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
-        username: 'My Username',
-        password: 'My Password',
+        apiKey: 'My API Key',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo&hello=world');
     });
@@ -225,8 +202,7 @@ describe('instantiate client', () => {
       const client = new Streak({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { hello: 'world' },
-        username: 'My Username',
-        password: 'My Password',
+        apiKey: 'My API Key',
       });
       expect(client.buildURL('/foo', { hello: undefined })).toEqual('http://localhost:5000/foo');
     });
@@ -235,8 +211,7 @@ describe('instantiate client', () => {
   test('custom fetch', async () => {
     const client = new Streak({
       baseURL: 'http://localhost:5000/',
-      username: 'My Username',
-      password: 'My Password',
+      apiKey: 'My API Key',
       fetch: (url) => {
         return Promise.resolve(
           new Response(JSON.stringify({ url, custom: true }), {
@@ -254,8 +229,7 @@ describe('instantiate client', () => {
     // make sure the global fetch type is assignable to our Fetch type
     const client = new Streak({
       baseURL: 'http://localhost:5000/',
-      username: 'My Username',
-      password: 'My Password',
+      apiKey: 'My API Key',
       fetch: defaultFetch,
     });
   });
@@ -263,8 +237,7 @@ describe('instantiate client', () => {
   test('custom signal', async () => {
     const client = new Streak({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-      username: 'My Username',
-      password: 'My Password',
+      apiKey: 'My API Key',
       fetch: (...args) => {
         return new Promise((resolve, reject) =>
           setTimeout(
@@ -294,12 +267,7 @@ describe('instantiate client', () => {
       return new Response(JSON.stringify({}), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Streak({
-      baseURL: 'http://localhost:5000/',
-      username: 'My Username',
-      password: 'My Password',
-      fetch: testFetch,
-    });
+    const client = new Streak({ baseURL: 'http://localhost:5000/', apiKey: 'My API Key', fetch: testFetch });
 
     await client.patch('/foo');
     expect(capturedRequest?.method).toEqual('PATCH');
@@ -307,20 +275,12 @@ describe('instantiate client', () => {
 
   describe('baseUrl', () => {
     test('trailing slash', () => {
-      const client = new Streak({
-        baseURL: 'http://localhost:5000/custom/path/',
-        username: 'My Username',
-        password: 'My Password',
-      });
+      const client = new Streak({ baseURL: 'http://localhost:5000/custom/path/', apiKey: 'My API Key' });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
     test('no trailing slash', () => {
-      const client = new Streak({
-        baseURL: 'http://localhost:5000/custom/path',
-        username: 'My Username',
-        password: 'My Password',
-      });
+      const client = new Streak({ baseURL: 'http://localhost:5000/custom/path', apiKey: 'My API Key' });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
@@ -329,63 +289,37 @@ describe('instantiate client', () => {
     });
 
     test('explicit option', () => {
-      const client = new Streak({
-        baseURL: 'https://example.com',
-        username: 'My Username',
-        password: 'My Password',
-      });
+      const client = new Streak({ baseURL: 'https://example.com', apiKey: 'My API Key' });
       expect(client.baseURL).toEqual('https://example.com');
     });
 
     test('env variable', () => {
       process.env['STREAK_BASE_URL'] = 'https://example.com/from_env';
-      const client = new Streak({ username: 'My Username', password: 'My Password' });
+      const client = new Streak({ apiKey: 'My API Key' });
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
       process.env['STREAK_BASE_URL'] = ''; // empty
-      const client = new Streak({ username: 'My Username', password: 'My Password' });
-      expect(client.baseURL).toEqual('https://api.streak.com/api/v1');
+      const client = new Streak({ apiKey: 'My API Key' });
+      expect(client.baseURL).toEqual('https://api.streak.com/api');
     });
 
     test('blank env variable', () => {
       process.env['STREAK_BASE_URL'] = '  '; // blank
-      const client = new Streak({ username: 'My Username', password: 'My Password' });
-      expect(client.baseURL).toEqual('https://api.streak.com/api/v1');
-    });
-
-    test('env variable with environment', () => {
-      process.env['STREAK_BASE_URL'] = 'https://example.com/from_env';
-
-      expect(
-        () => new Streak({ username: 'My Username', password: 'My Password', environment: 'production' }),
-      ).toThrowErrorMatchingInlineSnapshot(
-        `"Ambiguous URL; The \`baseURL\` option (or STREAK_BASE_URL env var) and the \`environment\` option are given. If you want to use the environment you must pass baseURL: null"`,
-      );
-
-      const client = new Streak({
-        username: 'My Username',
-        password: 'My Password',
-        baseURL: null,
-        environment: 'production',
-      });
-      expect(client.baseURL).toEqual('https://api.streak.com/api/v1');
+      const client = new Streak({ apiKey: 'My API Key' });
+      expect(client.baseURL).toEqual('https://api.streak.com/api');
     });
 
     test('in request options', () => {
-      const client = new Streak({ username: 'My Username', password: 'My Password' });
+      const client = new Streak({ apiKey: 'My API Key' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/option/foo',
       );
     });
 
     test('in request options overridden by client options', () => {
-      const client = new Streak({
-        username: 'My Username',
-        password: 'My Password',
-        baseURL: 'http://localhost:5000/client',
-      });
+      const client = new Streak({ apiKey: 'My API Key', baseURL: 'http://localhost:5000/client' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/client/foo',
       );
@@ -393,7 +327,7 @@ describe('instantiate client', () => {
 
     test('in request options overridden by env variable', () => {
       process.env['STREAK_BASE_URL'] = 'http://localhost:5000/env';
-      const client = new Streak({ username: 'My Username', password: 'My Password' });
+      const client = new Streak({ apiKey: 'My API Key' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/env/foo',
       );
@@ -401,22 +335,17 @@ describe('instantiate client', () => {
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new Streak({ maxRetries: 4, username: 'My Username', password: 'My Password' });
+    const client = new Streak({ maxRetries: 4, apiKey: 'My API Key' });
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new Streak({ username: 'My Username', password: 'My Password' });
+    const client2 = new Streak({ apiKey: 'My API Key' });
     expect(client2.maxRetries).toEqual(2);
   });
 
   describe('withOptions', () => {
     test('creates a new client with overridden options', async () => {
-      const client = new Streak({
-        baseURL: 'http://localhost:5000/',
-        maxRetries: 3,
-        username: 'My Username',
-        password: 'My Password',
-      });
+      const client = new Streak({ baseURL: 'http://localhost:5000/', maxRetries: 3, apiKey: 'My API Key' });
 
       const newClient = client.withOptions({
         maxRetries: 5,
@@ -441,8 +370,7 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         defaultHeaders: { 'X-Test-Header': 'test-value' },
         defaultQuery: { 'test-param': 'test-value' },
-        username: 'My Username',
-        password: 'My Password',
+        apiKey: 'My API Key',
       });
 
       const newClient = client.withOptions({
@@ -457,12 +385,7 @@ describe('instantiate client', () => {
     });
 
     test('respects runtime property changes when creating new client', () => {
-      const client = new Streak({
-        baseURL: 'http://localhost:5000/',
-        timeout: 1000,
-        username: 'My Username',
-        password: 'My Password',
-      });
+      const client = new Streak({ baseURL: 'http://localhost:5000/', timeout: 1000, apiKey: 'My API Key' });
 
       // Modify the client properties directly after creation
       client.baseURL = 'http://localhost:6000/';
@@ -490,25 +413,21 @@ describe('instantiate client', () => {
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['STREAK_USERNAME'] = 'My Username';
-    process.env['STREAK_PASSWORD'] = 'My Password';
+    process.env['API_KEY'] = 'My API Key';
     const client = new Streak();
-    expect(client.username).toBe('My Username');
-    expect(client.password).toBe('My Password');
+    expect(client.apiKey).toBe('My API Key');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
-    process.env['STREAK_USERNAME'] = 'another My Username';
-    process.env['STREAK_PASSWORD'] = 'another My Password';
-    const client = new Streak({ username: 'My Username', password: 'My Password' });
-    expect(client.username).toBe('My Username');
-    expect(client.password).toBe('My Password');
+    process.env['API_KEY'] = 'another My API Key';
+    const client = new Streak({ apiKey: 'My API Key' });
+    expect(client.apiKey).toBe('My API Key');
   });
 });
 
 describe('request building', () => {
-  const client = new Streak({ username: 'My Username', password: 'My Password' });
+  const client = new Streak({ apiKey: 'My API Key' });
 
   describe('custom headers', () => {
     test('handles undefined', async () => {
@@ -527,7 +446,7 @@ describe('request building', () => {
 });
 
 describe('default encoder', () => {
-  const client = new Streak({ username: 'My Username', password: 'My Password' });
+  const client = new Streak({ apiKey: 'My API Key' });
 
   class Serializable {
     toJSON() {
@@ -612,12 +531,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Streak({
-      username: 'My Username',
-      password: 'My Password',
-      timeout: 10,
-      fetch: testFetch,
-    });
+    const client = new Streak({ apiKey: 'My API Key', timeout: 10, fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -647,12 +561,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Streak({
-      username: 'My Username',
-      password: 'My Password',
-      fetch: testFetch,
-      maxRetries: 4,
-    });
+    const client = new Streak({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 4 });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
 
@@ -676,12 +585,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new Streak({
-      username: 'My Username',
-      password: 'My Password',
-      fetch: testFetch,
-      maxRetries: 4,
-    });
+    const client = new Streak({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 4 });
 
     expect(
       await client.request({
@@ -711,8 +615,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
     const client = new Streak({
-      username: 'My Username',
-      password: 'My Password',
+      apiKey: 'My API Key',
       fetch: testFetch,
       maxRetries: 4,
       defaultHeaders: { 'X-Stainless-Retry-Count': null },
@@ -744,12 +647,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new Streak({
-      username: 'My Username',
-      password: 'My Password',
-      fetch: testFetch,
-      maxRetries: 4,
-    });
+    const client = new Streak({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 4 });
 
     expect(
       await client.request({
@@ -779,7 +677,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Streak({ username: 'My Username', password: 'My Password', fetch: testFetch });
+    const client = new Streak({ apiKey: 'My API Key', fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -809,7 +707,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Streak({ username: 'My Username', password: 'My Password', fetch: testFetch });
+    const client = new Streak({ apiKey: 'My API Key', fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);

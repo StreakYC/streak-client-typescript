@@ -6,4 +6,4 @@ Types:
 
 Methods:
 
-- <code title="get /users/me">client.users.<a href="./src/resources/users.ts">retrieveCurrent</a>() -> UserRetrieveCurrentResponse</code>
+- <code title="get /v1/users/me">client.users.<a href="./src/resources/users.ts">retrieveCurrent</a>() -> UserRetrieveCurrentResponse</code>

@@ -12,7 +12,7 @@ export class Users extends APIResource {
    * access its own user object.
    */
   retrieveCurrent(options?: RequestOptions): APIPromise<UserRetrieveCurrentResponse> {
-    return this._client.get('/users/me', options);
+    return this._client.get('/v1/users/me', options);
   }
 }
 
