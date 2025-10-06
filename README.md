@@ -26,8 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 import Streak from 'streak';
 
 const client = new Streak({
-  apiKey: process.env['API_KEY'], // This is the default and can be omitted
-  foo: 'My Foo',
+  apiKey: 'My API Key',
 });
 
 const response = await client.users.retrieveCurrent();
@@ -44,8 +43,7 @@ This library includes TypeScript definitions for all request params and response
 import Streak from 'streak';
 
 const client = new Streak({
-  apiKey: process.env['API_KEY'], // This is the default and can be omitted
-  foo: 'My Foo',
+  apiKey: 'My API Key',
 });
 
 const response: Streak.UserRetrieveCurrentResponse = await client.users.retrieveCurrent();
