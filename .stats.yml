@@ -1,4 +1,4 @@
 configured_endpoints: 1
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/streak%2Fstreak-0257feec02ba9adbce53ce7343034cf0346ca5adf18b982908304ce723dac8d1.yml
-openapi_spec_hash: 6ee0bfda31d9a8c44c18639f5afbc297
-config_hash: c8cd625e99a9bee696acd39e2aba14d9
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/streak%2Fstreak-a96f4421fd9a061fdf9ae8194892bd0db7a5509ee61506a6daaabff28e6f5640.yml
+openapi_spec_hash: 7854c7c72634017a1e4474a4521ef8f0
+config_hash: d5fed5611691d04b741bfb434f3073b4

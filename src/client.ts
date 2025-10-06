@@ -31,8 +31,6 @@ import {
 import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
-  apiKey: string;
-
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
@@ -106,8 +104,6 @@ export interface ClientOptions {
  * API Client for interfacing with the Streak API.
  */
 export class Streak {
-  apiKey: string;
-
   baseURL: string;
   maxRetries: number;
   timeout: number;
@@ -123,7 +119,6 @@ export class Streak {
   /**
    * API Client for interfacing with the Streak API.
    *
-   * @param {string} opts.apiKey
    * @param {string} [opts.baseURL=process.env['STREAK_BASE_URL'] ?? https://api.streak.com/api] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -132,15 +127,8 @@ export class Streak {
    * @param {HeadersLike} opts.defaultHeaders - Default headers to include with every request to the API.
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
-  constructor({ baseURL = readEnv('STREAK_BASE_URL'), apiKey, ...opts }: ClientOptions) {
-    if (apiKey === undefined) {
-      throw new Errors.StreakError(
-        "Missing required client option apiKey; you need to instantiate the Streak client with an apiKey option, like new Streak({ apiKey: 'My API Key' }).",
-      );
-    }
-
+  constructor({ baseURL = readEnv('STREAK_BASE_URL'), ...opts }: ClientOptions = {}) {
     const options: ClientOptions = {
-      apiKey,
       ...opts,
       baseURL: baseURL || `https://api.streak.com/api`,
     };
@@ -161,8 +149,6 @@ export class Streak {
     this.#encoder = Opts.FallbackEncoder;
 
     this._options = options;
-
-    this.apiKey = apiKey;
   }
 
   /**
@@ -178,7 +164,6 @@ export class Streak {
       logLevel: this.logLevel,
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
-      apiKey: this.apiKey,
       ...options,
     });
     return client;
@@ -197,10 +182,6 @@ export class Streak {
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
     return;
-  }
-
-  protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
   /**
@@ -640,7 +621,6 @@ export class Streak {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
       },
-      await this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
       options.headers,
