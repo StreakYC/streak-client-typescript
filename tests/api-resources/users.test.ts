@@ -3,8 +3,7 @@
 import Streak from 'streak';
 
 const client = new Streak({
-  username: 'My Username',
-  password: 'My Password',
+  apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 

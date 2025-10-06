@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Streak REST API from server-side TypeScript or JavaScript.
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [streak.readme.io](https://streak.readme.io/). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -25,11 +25,7 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Streak from 'streak';
 
-const client = new Streak({
-  username: process.env['STREAK_USERNAME'], // This is the default and can be omitted
-  password: process.env['STREAK_PASSWORD'], // This is the default and can be omitted
-  environment: 'environment_1', // defaults to 'production'
-});
+const client = new Streak();
 
 const response = await client.users.retrieveCurrent();
 
@@ -44,11 +40,7 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Streak from 'streak';
 
-const client = new Streak({
-  username: process.env['STREAK_USERNAME'], // This is the default and can be omitted
-  password: process.env['STREAK_PASSWORD'], // This is the default and can be omitted
-  environment: 'environment_1', // defaults to 'production'
-});
+const client = new Streak();
 
 const response: Streak.UserRetrieveCurrentResponse = await client.users.retrieveCurrent();
 ```
@@ -99,6 +91,7 @@ You can use the `maxRetries` option to configure or disable this:
 ```js
 // Configure the default for all requests:
 const client = new Streak({
+  apiKey: 'My API Key',
   maxRetries: 0, // default is 2
 });
 
@@ -116,6 +109,7 @@ Requests time out after 1 minute by default. You can configure this with a `time
 ```ts
 // Configure the default for all requests:
 const client = new Streak({
+  apiKey: 'My API Key',
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
