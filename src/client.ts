@@ -20,6 +20,7 @@ import { UserRetrieveCurrentResponse, Users } from './resources/users';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
+import { toBase64 } from './internal/utils/base64';
 import { readEnv } from './internal/utils/env';
 import {
   type LogLevel,
@@ -35,6 +36,8 @@ export interface ClientOptions {
    * Defaults to process.env['API_KEY'].
    */
   apiKey?: string | undefined;
+
+  foo?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -110,6 +113,7 @@ export interface ClientOptions {
  */
 export class Streak {
   apiKey: string;
+  foo: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -127,6 +131,7 @@ export class Streak {
    * API Client for interfacing with the Streak API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['API_KEY'] ?? undefined]
+   * @param {string | null | undefined} [opts.foo]
    * @param {string} [opts.baseURL=process.env['STREAK_BASE_URL'] ?? https://api.streak.com/api] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -138,6 +143,7 @@ export class Streak {
   constructor({
     baseURL = readEnv('STREAK_BASE_URL'),
     apiKey = readEnv('API_KEY'),
+    foo = null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -148,6 +154,7 @@ export class Streak {
 
     const options: ClientOptions = {
       apiKey,
+      foo,
       ...opts,
       baseURL: baseURL || `https://api.streak.com/api`,
     };
@@ -170,6 +177,7 @@ export class Streak {
     this._options = options;
 
     this.apiKey = apiKey;
+    this.foo = foo;
   }
 
   /**
@@ -186,6 +194,7 @@ export class Streak {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
+      foo: this.foo,
       ...options,
     });
     return client;
@@ -203,7 +212,30 @@ export class Streak {
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
-    return;
+    if (this.apiKey && this.foo && values.get('authorization')) {
+      return;
+    }
+    if (nulls.has('authorization')) {
+      return;
+    }
+
+    throw new Error(
+      'Could not resolve authentication method. Expected the apiKey or foo to be set. Or for the "Authorization" headers to be explicitly omitted',
+    );
+  }
+
+  protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    if (!this.apiKey) {
+      return undefined;
+    }
+
+    if (!this.foo) {
+      return undefined;
+    }
+
+    const credentials = `${this.apiKey}:${this.foo}`;
+    const Authorization = `Basic ${toBase64(credentials)}`;
+    return buildHeaders([{ Authorization }]);
   }
 
   /**
@@ -643,6 +675,7 @@ export class Streak {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
       },
+      await this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
       options.headers,
