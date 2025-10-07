@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1 (2025-10-07)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/StreakYC/streak-client-typescript/compare/v0.1.0...v0.1.1)
+
+### Chores
+
+* **internal:** use npm pack for build uploads ([daa9f29](https://github.com/StreakYC/streak-client-typescript/commit/daa9f296b47deadc1c2be6e23b0977c2717d94f9))
+
 ## 0.1.0 (2025-10-07)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/StreakYC/streak-client-typescript/compare/v0.0.1...v0.1.0)
