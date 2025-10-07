@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 (2025-10-07)
+
+Full Changelog: [v0.1.3...v0.2.0](https://github.com/StreakYC/streak-client-typescript/compare/v0.1.3...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([0de184c](https://github.com/StreakYC/streak-client-typescript/commit/0de184ce4ee029fe6d36310270fce942323fe5d5))
+* **api:** manual updates ([52b46bd](https://github.com/StreakYC/streak-client-typescript/commit/52b46bd64fc9ad4905008cb68421190c0628ccba))
+
 ## 0.1.3 (2025-10-07)
 
 Full Changelog: [v0.1.2...v0.1.3](https://github.com/StreakYC/streak-client-typescript/compare/v0.1.2...v0.1.3)
