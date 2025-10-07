@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'streak-client-typescript/internal/uploads';
-import { toFile } from 'streak-client-typescript/core/uploads';
+import { multipartFormRequestOptions, createForm } from '@streakyc/streak/internal/uploads';
+import { toFile } from '@streakyc/streak/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

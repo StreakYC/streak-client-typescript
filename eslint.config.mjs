@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^streak-client-typescript(/.*)?',
+              regex: '^@streakyc/streak(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],
