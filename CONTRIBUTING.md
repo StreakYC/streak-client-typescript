@@ -55,12 +55,12 @@ $ cd streak-client-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link streak-client
+$ yarn link streak-api
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global streak-client
+$ pnpm link -—global streak-api
 ```
 
 ## Running tests
