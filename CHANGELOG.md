@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1 (2025-10-07)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/StreakYC/streak-client-typescript/compare/v0.3.0...v0.3.1)
+
+### Chores
+
+* update SDK settings ([16634e9](https://github.com/StreakYC/streak-client-typescript/commit/16634e9e2a8103cb8838131f441e34b6b1f840cf))
+
 ## 0.3.0 (2025-10-07)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/StreakYC/streak-client-typescript/compare/v0.2.0...v0.3.0)
