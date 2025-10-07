@@ -1,6 +1,6 @@
 # Streak TypeScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/streak-api.svg?label=npm%20(stable)>)](https://npmjs.org/package/streak-api) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/streak-api)
+[![NPM version](<https://img.shields.io/npm/v/streak-api.svg?label=npm%20(stable)>)](https://npmjs.org/package/streak-api) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/streak-api) [![JSR Version](https://jsr.io/badges/@streak-api/streak)](https://jsr.io/@streak-api/streak)
 
 This library provides convenient access to the Streak REST API from server-side TypeScript or JavaScript.
 
@@ -12,6 +12,21 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ```sh
 npm install streak-api
+```
+
+### Installation from JSR
+
+```sh
+deno add jsr:@streak-api/streak
+npx jsr add @streak-api/streak
+```
+
+These commands will make the module importable from the `@streak-api/streak` scope:
+
+You can also [import directly from JSR](https://jsr.io/docs/using-packages#importing-with-jsr-specifiers) without an install step if you're using the Deno JavaScript runtime:
+
+```ts
+import Streak from 'jsr:@streak-api/streak';
 ```
 
 ## Usage
@@ -310,7 +325,7 @@ const client = new Streak({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import Streak from 'npm:streak-api';
+import Streak from 'jsr:@streak-api/streak';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const client = new Streak({
