@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^streak-client-typescript$': '<rootDir>/src/index.ts',
-    '^streak-client-typescript/(.*)$': '<rootDir>/src/$1',
+    '^@streakyc/streak$': '<rootDir>/src/index.ts',
+    '^@streakyc/streak/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',

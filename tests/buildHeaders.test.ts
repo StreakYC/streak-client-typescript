@@ -1,9 +1,5 @@
 import { inspect } from 'node:util';
-import {
-  buildHeaders,
-  type HeadersLike,
-  type NullableHeaders,
-} from 'streak-client-typescript/internal/headers';
+import { buildHeaders, type HeadersLike, type NullableHeaders } from '@streakyc/streak/internal/headers';
 
 function inspectNullableHeaders(headers: NullableHeaders) {
   return `NullableHeaders {${[

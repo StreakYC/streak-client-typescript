@@ -1,6 +1,6 @@
 import fs from 'fs';
-import type { ResponseLike } from 'streak-client-typescript/internal/to-file';
-import { toFile } from 'streak-client-typescript/core/uploads';
+import type { ResponseLike } from '@streakyc/streak/internal/to-file';
+import { toFile } from '@streakyc/streak/core/uploads';
 import { File } from 'node:buffer';
 
 class MyClass {
@@ -97,7 +97,7 @@ describe('missing File error message', () => {
   });
 
   test('is thrown', async () => {
-    const uploads = await import('streak-client-typescript/core/uploads');
+    const uploads = await import('@streakyc/streak/core/uploads');
     await expect(
       uploads.toFile(mockResponse({ url: 'https://example.com/my/audio.mp3' })),
     ).rejects.toMatchInlineSnapshot(

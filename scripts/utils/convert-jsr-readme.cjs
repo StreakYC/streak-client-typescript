@@ -133,7 +133,7 @@ function processReadme(config, file) {
 }
 
 const config = {
-  npm: 'streak-client-typescript',
+  npm: '@streakyc/streak',
   jsr: '@streak-api/streak',
 };
 
