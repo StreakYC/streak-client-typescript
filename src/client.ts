@@ -16,7 +16,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { UserRetrieveCurrentResponse, Users } from './resources/users';
+import { User, Users } from './resources/users';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -718,5 +718,5 @@ Streak.Users = Users;
 export declare namespace Streak {
   export type RequestOptions = Opts.RequestOptions;
 
-  export { Users as Users, type UserRetrieveCurrentResponse as UserRetrieveCurrentResponse };
+  export { Users as Users, type User as User };
 }

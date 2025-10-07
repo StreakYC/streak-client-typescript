@@ -9,8 +9,8 @@ const client = new Streak({
 
 describe('resource users', () => {
   // Prism tests are disabled
-  test.skip('retrieveCurrent', async () => {
-    const responsePromise = client.users.retrieveCurrent();
+  test.skip('getMe', async () => {
+    const responsePromise = client.users.getMe();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
