@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'streak-client/core/api-promise';
+import { APIPromise } from 'streak-api/core/api-promise';
 
 import util from 'node:util';
-import Streak from 'streak-client';
-import { APIUserAbortError } from 'streak-client';
+import Streak from 'streak-api';
+import { APIUserAbortError } from 'streak-api';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
