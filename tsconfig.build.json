@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "streak/*": ["./dist/src/*"],
-      "streak": ["./dist/src/index.ts"]
+      "streak-client-typescript/*": ["./dist/src/*"],
+      "streak-client-typescript": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,
