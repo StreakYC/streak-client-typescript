@@ -26,7 +26,7 @@ const client = new Streak({
   apiKey: 'strk_1234',
 });
 
-const response = await client.users.retrieveCurrent();
+const response = await client.users.getMe();
 
 console.log(response.creationTimestamp);
 ```
@@ -43,7 +43,7 @@ const client = new Streak({
   apiKey: 'strk_1234',
 });
 
-const response: Streak.UserRetrieveCurrentResponse = await client.users.retrieveCurrent();
+const response: Streak.UserGetMeResponse = await client.users.getMe();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -56,7 +56,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const response = await client.users.retrieveCurrent().catch(async (err) => {
+const response = await client.users.getMe().catch(async (err) => {
   if (err instanceof Streak.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -96,7 +96,7 @@ const client = new Streak({
 });
 
 // Or, configure per-request:
-await client.users.retrieveCurrent({
+await client.users.getMe({
   maxRetries: 5,
 });
 ```
@@ -113,7 +113,7 @@ const client = new Streak({
 });
 
 // Override per-request:
-await client.users.retrieveCurrent({
+await client.users.getMe({
   timeout: 5 * 1000,
 });
 ```
@@ -136,11 +136,11 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Streak();
 
-const response = await client.users.retrieveCurrent().asResponse();
+const response = await client.users.getMe().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.users.retrieveCurrent().withResponse();
+const { data: response, response: raw } = await client.users.getMe().withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(response.creationTimestamp);
 ```
@@ -222,7 +222,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.users.retrieveCurrent({
+client.users.getMe({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

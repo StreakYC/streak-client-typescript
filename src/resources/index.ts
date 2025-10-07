@@ -1,3 +1,3 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Users, type UserRetrieveCurrentResponse } from './users';
+export { Users, type UserGetMeResponse } from './users';
