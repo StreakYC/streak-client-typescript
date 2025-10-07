@@ -26,9 +26,9 @@ const client = new Streak({
   apiKey: 'strk_1234',
 });
 
-const response = await client.users.getMe();
+const user = await client.users.getMe();
 
-console.log(response.creationTimestamp);
+console.log(user.creationTimestamp);
 ```
 
 ### Request & Response types
@@ -43,7 +43,7 @@ const client = new Streak({
   apiKey: 'strk_1234',
 });
 
-const response: Streak.UserGetMeResponse = await client.users.getMe();
+const user: Streak.User = await client.users.getMe();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -56,7 +56,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const response = await client.users.getMe().catch(async (err) => {
+const user = await client.users.getMe().catch(async (err) => {
   if (err instanceof Streak.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -140,9 +140,9 @@ const response = await client.users.getMe().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.users.getMe().withResponse();
+const { data: user, response: raw } = await client.users.getMe().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response.creationTimestamp);
+console.log(user.creationTimestamp);
 ```
 
 ### Logging
