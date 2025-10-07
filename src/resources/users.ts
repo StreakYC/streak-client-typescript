@@ -11,12 +11,12 @@ export class Users extends APIResource {
    * Since API keys are associated with the user, each API key only has privileges to
    * access its own user object.
    */
-  retrieveCurrent(options?: RequestOptions): APIPromise<UserRetrieveCurrentResponse> {
+  getMe(options?: RequestOptions): APIPromise<UserGetMeResponse> {
     return this._client.get('/v1/users/me', options);
   }
 }
 
-export interface UserRetrieveCurrentResponse {
+export interface UserGetMeResponse {
   creationTimestamp?: number;
 
   displayName?: string;
@@ -31,11 +31,9 @@ export interface UserRetrieveCurrentResponse {
 
   lastUpdatedTimestamp?: number;
 
-  lowercaseEmail?: string;
-
   userKey?: string;
 }
 
 export declare namespace Users {
-  export { type UserRetrieveCurrentResponse as UserRetrieveCurrentResponse };
+  export { type UserGetMeResponse as UserGetMeResponse };
 }
