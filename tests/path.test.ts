@@ -1,4 +1,4 @@
-import { createPathTagFunction, encodeURIPath } from 'streak/internal/utils/path';
+import { createPathTagFunction, encodeURIPath } from 'streak-client-typescript/internal/utils/path';
 import { inspect } from 'node:util';
 import { runInNewContext } from 'node:vm';
 

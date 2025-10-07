@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "streak/*": ["./src/*"],
-      "streak": ["./src/index.ts"]
+      "streak-client-typescript/*": ["./src/*"],
+      "streak-client-typescript": ["./src/index.ts"]
     },
     "noEmit": true,
 

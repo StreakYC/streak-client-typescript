@@ -1,5 +1,5 @@
 {
-  "name": "streak",
+  "name": "streak-client-typescript",
   "version": "0.3.0",
   "description": "The official TypeScript library for the Streak API",
   "author": "Streak <>",

@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Streak } from 'streak';
+import { Streak } from 'streak-client-typescript';
 
 const { stringifyQuery } = Streak.prototype as any;
 
