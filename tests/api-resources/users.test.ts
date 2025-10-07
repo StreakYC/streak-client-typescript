@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Streak from 'streak-api';
+import Streak from '@streakyc/streak';
 
 const client = new Streak({
   apiKey: 'strk_1234',
