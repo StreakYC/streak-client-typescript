@@ -17,21 +17,19 @@ export class Users extends APIResource {
 }
 
 export interface User {
-  creationTimestamp?: number;
+  creationTimestamp: number;
 
-  displayName?: string;
+  displayName: string;
 
-  email?: string;
+  email: string;
 
-  isOauthComplete?: boolean;
+  isOauthComplete: boolean;
 
-  key?: string;
+  key: string;
 
-  lastSeenTimestamp?: number;
+  lastSeenTimestamp: number;
 
-  lastUpdatedTimestamp?: number;
-
-  userKey?: string;
+  lastUpdatedTimestamp: number;
 }
 
 export declare namespace Users {

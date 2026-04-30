@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.4.0 (2025-12-06)
+
+Full Changelog: [v0.3.1...v0.4.0](https://github.com/StreakYC/streak-client-typescript/compare/v0.3.1...v0.4.0)
+
+### Features
+
+* **api:** manual updates ([dc2877d](https://github.com/StreakYC/streak-client-typescript/commit/dc2877d8e66e1790952134215ec3a02f1c1d1ce5))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([f0152ed](https://github.com/StreakYC/streak-client-typescript/commit/f0152edbe4843f0bfb0b63c2559d021c31791ef4))
+* **mcp:** return correct lines on typescript errors ([d9e4b3b](https://github.com/StreakYC/streak-client-typescript/commit/d9e4b3b4bdd6764fc1af52caea3bb893e63b2189))
+
+
+### Chores
+
+* add typescript-estree dependency for jsr readme script ([9658a6b](https://github.com/StreakYC/streak-client-typescript/commit/9658a6bbbcba819bb4858fcc645e0ed89ef18128))
+* **client:** fix logger property type ([28ae5eb](https://github.com/StreakYC/streak-client-typescript/commit/28ae5eb7ee9537a24cbd80d73670cc7516f577de))
+* **internal:** codegen related update ([228fbd7](https://github.com/StreakYC/streak-client-typescript/commit/228fbd7ede68295f5eaa57c118b3f11e8fe82b55))
+* **internal:** codegen related update ([16fa73d](https://github.com/StreakYC/streak-client-typescript/commit/16fa73d380c7d6b4926e104ac5cb71be3327e304))
+* **internal:** upgrade eslint ([03c4208](https://github.com/StreakYC/streak-client-typescript/commit/03c42081298b550c14e4333e61638c97c979db58))
+
 ## 0.3.1 (2025-10-07)
 
 Full Changelog: [v0.3.0...v0.3.1](https://github.com/StreakYC/streak-client-typescript/compare/v0.3.0...v0.3.1)
