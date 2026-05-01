@@ -8,7 +8,7 @@ const client = new Streak({
 });
 
 describe('resource users', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getMe', async () => {
     const responsePromise = client.users.getMe();
     const rawResponse = await responsePromise.asResponse();
