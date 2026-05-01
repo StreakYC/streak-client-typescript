@@ -6,30 +6,177 @@ import { RequestOptions } from '../internal/request-options';
 
 export class Users extends APIResource {
   /**
-   * Each Streak user has a corresponding user object. Creation of users is done when
-   * a user signs up for Streak and these objects can not be altered through the API.
-   * Since API keys are associated with the user, each API key only has privileges to
-   * access its own user object.
+   * Returns information about the currently authenticated user
    */
   getMe(options?: RequestOptions): APIPromise<User> {
-    return this._client.get('/v1/users/me', options);
+    return this._client.get('/users/me', options);
   }
 }
 
 export interface User {
-  creationTimestamp: number;
+  archiveKeysetFileLink?: string | null;
 
-  displayName: string;
+  automaticallySendInvoiceEmails?: boolean | null;
 
-  email: string;
+  canceledTrial?: boolean | null;
 
-  isOauthComplete: boolean;
+  /**
+   * Epoch timestamp in milliseconds since 1970-01-01T00:00:00Z.
+   */
+  creationTimestamp?: number | null;
 
-  key: string;
+  customerSpecifiedInvoiceData?: string | null;
 
-  lastSeenTimestamp: number;
+  displayName?: string | null;
 
-  lastUpdatedTimestamp: number;
+  email?: string | null;
+
+  emailsToSendInvoiceTo?: Array<string> | null;
+
+  experiments?: { [key: string]: unknown } | null;
+
+  externalSharingRestrictionOnTeamsPipelines?: boolean | null;
+
+  firstExtension?: string | null;
+
+  /**
+   * Epoch timestamp in milliseconds since 1970-01-01T00:00:00Z.
+   */
+  firstOauthTimestamp?: number | null;
+
+  googleAnalyticsClientId?: string | null;
+
+  googleDriveId?: string | null;
+
+  googleProfileFirstName?: string | null;
+
+  googleProfileFullName?: string | null;
+
+  googleProfileGender?: string | null;
+
+  googleProfileId?: string | null;
+
+  googleProfileLastName?: string | null;
+
+  googleProfileLink?: string | null;
+
+  googleProfileLocale?: string | null;
+
+  googleProfilePhotoUrl?: string | null;
+
+  hasCancellationDiscount?: boolean | null;
+
+  integrationSegment?: number | null;
+
+  intercomHmac?: string | null;
+
+  intercomJwt?: string | null;
+
+  isOauthComplete?: boolean;
+
+  key?: string | null;
+
+  /**
+   * Epoch timestamp in milliseconds since 1970-01-01T00:00:00Z.
+   */
+  lastProPlusTrialStart?: number | null;
+
+  /**
+   * Epoch timestamp in milliseconds since 1970-01-01T00:00:00Z.
+   */
+  lastSavedTimestamp?: number | null;
+
+  /**
+   * Epoch timestamp in milliseconds since 1970-01-01T00:00:00Z.
+   */
+  lastSeenTimestamp?: number | null;
+
+  lastTrialLength?: number;
+
+  /**
+   * Epoch timestamp in milliseconds since 1970-01-01T00:00:00Z.
+   */
+  lastTrialStart?: number | null;
+
+  /**
+   * Epoch timestamp in milliseconds since 1970-01-01T00:00:00Z.
+   */
+  lastUpdatedTimestamp?: number | null;
+
+  onTrialWithoutCreditCard?: boolean | null;
+
+  orgKey?: string | null;
+
+  phoneNumber?: string | null;
+
+  securityReportOnTeamsPipelines?: boolean | null;
+
+  streakCalendarId?: string | null;
+
+  timezoneId?: string | null;
+
+  tourId?: string | null;
+
+  usedPlatforms?: Array<User.UsedPlatform> | null;
+
+  userId?: number | null;
+
+  userKey?: string | null;
+
+  userSettingsKey?: string | null;
+
+  userSource?:
+    | 'UNKNOWN'
+    | 'WEB'
+    | 'MOBILE'
+    | 'SHARING'
+    | 'GOOGLE_APPS_MARKETPLACE'
+    | 'ANDROID'
+    | 'GMAIL_ADDON'
+    | 'WEB_MAIL_MERGE'
+    | 'WEB_STREAK_SHARE'
+    | 'WEB_EMAIL_TRACKING'
+    | null;
+
+  userType?: 'HUMAN' | 'AGENT' | null;
+
+  wantsTaskDigestEmail?: boolean | null;
+}
+
+export namespace User {
+  export interface UsedPlatform {
+    /**
+     * Epoch timestamp in milliseconds since 1970-01-01T00:00:00Z.
+     */
+    firstDateOfUse: number;
+
+    /**
+     * Epoch timestamp in milliseconds since 1970-01-01T00:00:00Z.
+     */
+    lastDateOfUse: number;
+
+    platform:
+      | 'WEB'
+      | 'IOS'
+      | 'IOS_IN_HOUSE'
+      | 'ANDROID'
+      | 'ZAPIER'
+      | 'STRIPE'
+      | 'API'
+      | 'SHEETS'
+      | 'GOOGLE_IMAGE_PROXY'
+      | 'GOOGLE_WEBHOOK'
+      | 'TASK_QUEUE'
+      | 'CLEARBIT'
+      | 'HANGOUTS_CHAT'
+      | 'UNKNOWN'
+      | 'GMAIL_ADDON_IOS'
+      | 'GMAIL_ADDON_ANDROID'
+      | 'GMAIL_ADDON_WEB'
+      | 'SLACK'
+      | 'MCP'
+      | 'RETOOL';
+  }
 }
 
 export declare namespace Users {
