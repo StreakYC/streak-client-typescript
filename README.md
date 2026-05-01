@@ -43,7 +43,7 @@ const client = new Streak({
 
 const user = await client.users.getMe();
 
-console.log(user.creationTimestamp);
+console.log(user.archiveKeysetFileLink);
 ```
 
 ### Request & Response types
@@ -157,7 +157,7 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: user, response: raw } = await client.users.getMe().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(user.creationTimestamp);
+console.log(user.archiveKeysetFileLink);
 ```
 
 ### Logging
