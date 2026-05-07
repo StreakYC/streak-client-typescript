@@ -3,8 +3,6 @@
   "version": "0.5.1",
   "exports": "./index.ts",
   "publish": {
-    "exclude": [
-      "!."
-    ]
+    "exclude": ["!."]
   }
 }
