@@ -1,8 +1,10 @@
 {
   "name": "@streak-api/streak",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "exports": "./index.ts",
   "publish": {
-    "exclude": ["!."]
+    "exclude": [
+      "!."
+    ]
   }
 }

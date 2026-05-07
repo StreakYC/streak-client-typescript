@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.6.0 (2026-05-07)
+
+Full Changelog: [v0.5.1...v0.6.0](https://github.com/StreakYC/streak-client-typescript/compare/v0.5.1...v0.6.0)
+
+### Features
+
+* **api:** manual updates ([d61f7ce](https://github.com/StreakYC/streak-client-typescript/commit/d61f7ce90e03d6b597a422671250539b39081727))
+* support setting headers via env ([2f9022f](https://github.com/StreakYC/streak-client-typescript/commit/2f9022fb2421e524af09f4dff50a180ae187d8c5))
+
+
+### Chores
+
+* **format:** run eslint and prettier separately ([4111787](https://github.com/StreakYC/streak-client-typescript/commit/4111787e5e70a23825eb68ea7c70b40e3a5c525b))
+* **internal:** codegen related update ([48cab2d](https://github.com/StreakYC/streak-client-typescript/commit/48cab2dd87c77bb655fcc3d18f5031a80d826d32))
+* **internal:** codegen related update ([af1eb43](https://github.com/StreakYC/streak-client-typescript/commit/af1eb430dd873296e1d63432b1ef064c66eaca2a))
+* remove custom code ([7993a79](https://github.com/StreakYC/streak-client-typescript/commit/7993a79c8b08f1004bcc66cb63c2caf847013a63))
+
 ## 0.5.1 (2026-05-01)
 
 Full Changelog: [v0.5.0...v0.5.1](https://github.com/StreakYC/streak-client-typescript/compare/v0.5.0...v0.5.1)
