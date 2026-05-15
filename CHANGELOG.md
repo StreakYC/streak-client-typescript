@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1 (2026-05-13)
+
+Full Changelog: [v0.6.0...v0.6.1](https://github.com/StreakYC/streak-client-typescript/compare/v0.6.0...v0.6.1)
+
+### Chores
+
+* redact api-key headers in debug logs ([3b02953](https://github.com/StreakYC/streak-client-typescript/commit/3b029536d911e1d8fc4bbc36eb9fd4ca4fae3c6a))
+
 ## 0.6.0 (2026-05-07)
 
 Full Changelog: [v0.5.1...v0.6.0](https://github.com/StreakYC/streak-client-typescript/compare/v0.5.1...v0.6.0)
