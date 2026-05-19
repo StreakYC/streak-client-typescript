@@ -1,7 +1,6 @@
 import fs from 'fs';
 import type { ResponseLike } from '@streakyc/streak/internal/to-file';
 import { toFile } from '@streakyc/streak/core/uploads';
-import { File } from 'node:buffer';
 
 class MyClass {
   name: string = 'foo';
