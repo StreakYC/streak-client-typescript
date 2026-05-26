@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.2 (2026-05-19)
+
+Full Changelog: [v0.6.1...v0.6.2](https://github.com/StreakYC/streak-client-typescript/compare/v0.6.1...v0.6.2)
+
+### Bug Fixes
+
+* **typescript:** upgrade tsc-multi so that it works with Node 26 ([8bafb90](https://github.com/StreakYC/streak-client-typescript/commit/8bafb90aad6f72307a3a8520fb5d383644cf4561))
+
+
+### Chores
+
+* **tests:** remove redundant File import ([345dcfd](https://github.com/StreakYC/streak-client-typescript/commit/345dcfd5be052c33f132c190f32027f1d13ef740))
+
 ## 0.6.1 (2026-05-13)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/StreakYC/streak-client-typescript/compare/v0.6.0...v0.6.1)
