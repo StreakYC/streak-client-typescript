@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.3 (2026-06-17)
+
+Full Changelog: [v0.6.2...v0.6.3](https://github.com/StreakYC/streak-client-typescript/compare/v0.6.2...v0.6.3)
+
+### Bug Fixes
+
+* **client:** send content-type header for requests with an omitted optional body ([c888804](https://github.com/StreakYC/streak-client-typescript/commit/c88880461226b10e8d31fd2f37d5e415b977a057))
+
 ## 0.6.2 (2026-05-19)
 
 Full Changelog: [v0.6.1...v0.6.2](https://github.com/StreakYC/streak-client-typescript/compare/v0.6.1...v0.6.2)
