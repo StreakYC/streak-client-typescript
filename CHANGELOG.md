@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.7.0 (2026-08-03)
+
+Full Changelog: [v0.6.3...v0.7.0](https://github.com/StreakYC/streak-client-typescript/compare/v0.6.3...v0.7.0)
+
+### Features
+
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([891ec7e](https://github.com/StreakYC/streak-client-typescript/commit/891ec7e433d178a2809d9c5d146ffe8c14296635))
+
+
+### Bug Fixes
+
+* **ci:** bump @arethetypeswrong/cli to ^0.18.0 and run CI workflows on Node 24 ([fa33b02](https://github.com/StreakYC/streak-client-typescript/commit/fa33b025b404a390adeac3255ab3a3cd06433728))
+* **stlc:** stop hand-edited CI workflows from blocking seals and builds ([e99ecaf](https://github.com/StreakYC/streak-client-typescript/commit/e99ecafbf561756e602cb855c4a5af70d2fe779a))
+
+
+### Chores
+
+* **internal:** codegen related update ([6faa2c6](https://github.com/StreakYC/streak-client-typescript/commit/6faa2c6711f183f267351d00a1bf204dbaa2f445))
+* **internal:** codegen related update ([481f839](https://github.com/StreakYC/streak-client-typescript/commit/481f839a01c9718d624240f9527bfe758362b148))
+
 ## 0.6.3 (2026-06-17)
 
 Full Changelog: [v0.6.2...v0.6.3](https://github.com/StreakYC/streak-client-typescript/compare/v0.6.2...v0.6.3)
