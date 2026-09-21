@@ -1,6 +1,6 @@
 # Streak TypeScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/@streakyc/streak.svg?label=npm%20(stable)>)](https://npmjs.org/package/@streakyc/streak) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@streakyc/streak) [![JSR Version](https://jsr.io/badges/@streak-api/streak)](https://jsr.io/@streak-api/streak)
+[![NPM version](<https://img.shields.io/npm/v/@streakyc/streak.svg?label=npm%20(stable)>)](https://npmjs.org/package/@streakyc/streak) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@streakyc/streak)
 
 This library provides convenient access to the Streak REST API from server-side TypeScript or JavaScript.
 
