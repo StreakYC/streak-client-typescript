@@ -197,5 +197,6 @@
     "engines": {
         "node": ">=18.0.0"
     },
-    "sideEffects": false
+    "sideEffects": false,
+    "license": "(MIT OR Apache-2.0)"
 }
