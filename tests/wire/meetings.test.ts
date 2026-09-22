@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("MeetingsClient", () => {
     test("listMeetings", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             hasNextPage: true,
@@ -44,7 +44,7 @@ describe("MeetingsClient", () => {
 
     test("createMeeting", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { meetingType: "CALL_LOG", startTimestamp: 1646870400000 };
         const rawResponseBody = {
             key: "key",
@@ -80,7 +80,7 @@ describe("MeetingsClient", () => {
 
     test("getMeeting", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             key: "key",
@@ -113,7 +113,7 @@ describe("MeetingsClient", () => {
 
     test("updateMeeting", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             key: "key",
@@ -147,7 +147,7 @@ describe("MeetingsClient", () => {
 
     test("deleteMeeting", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { success: true, message: "message" };
 

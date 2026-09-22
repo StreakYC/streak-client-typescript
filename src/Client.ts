@@ -13,7 +13,7 @@ import { TasksClient } from "./api/resources/tasks/client/Client.js";
 import { TeamClient } from "./api/resources/team/client/Client.js";
 import { UsersClient } from "./api/resources/users/client/Client.js";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
-import { type NormalizedClientOptions, normalizeClientOptions } from "./BaseClient.js";
+import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "./BaseClient.js";
 import * as core from "./core/index.js";
 
 export declare namespace StreakClient {
@@ -23,7 +23,7 @@ export declare namespace StreakClient {
 }
 
 export class StreakClient {
-    protected readonly _options: NormalizedClientOptions<StreakClient.Options>;
+    protected readonly _options: NormalizedClientOptionsWithAuth<StreakClient.Options>;
     protected _apiKeys: ApiKeysClient | undefined;
     protected _boxes: BoxesClient | undefined;
     protected _pipeline: PipelineClient | undefined;
@@ -38,7 +38,7 @@ export class StreakClient {
     protected _team: TeamClient | undefined;
 
     constructor(options: StreakClient.Options) {
-        this._options = normalizeClientOptions(options);
+        this._options = normalizeClientOptionsWithAuth(options);
     }
 
     public get apiKeys(): ApiKeysClient {
@@ -114,6 +114,7 @@ export class StreakClient {
                 maxRetries: this._options.maxRetries,
                 fetch: this._options.fetch,
                 logging: this._options.logging,
+                getAuthHeaders: async () => (await this._options.authProvider.getAuthRequest()).headers,
             },
             requestOptions,
         );

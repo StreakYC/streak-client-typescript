@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("SearchClient", () => {
     test("searchBoxesContactsAndOrganizations", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             results: { boxes: [{ boxKey: "boxKey" }], contacts: [{}], orgs: [{}] },

@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("TeamClient", () => {
     test("createTeam", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "name", members: [{}] };
         const rawResponseBody = {
             key: "key",
@@ -82,7 +82,7 @@ describe("TeamClient", () => {
 
     test("getTeam", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             key: "key",
@@ -150,7 +150,7 @@ describe("TeamClient", () => {
 
     test("updateTeam", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             key: "key",
@@ -225,7 +225,7 @@ describe("TeamClient", () => {
 
     test("listCurrentUsersTeams", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             hasNextPage: true,

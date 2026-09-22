@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("PipelineClient", () => {
     test("listPipelineFields", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = [
             {
@@ -38,7 +38,7 @@ describe("PipelineClient", () => {
 
     test("getPipelineField", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             key: "key",
@@ -69,7 +69,7 @@ describe("PipelineClient", () => {
 
     test("updatePipelineField", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             key: "key",
@@ -101,7 +101,7 @@ describe("PipelineClient", () => {
 
     test("deletePipelineField", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { success: true, message: "message" };
 
@@ -122,7 +122,7 @@ describe("PipelineClient", () => {
 
     test("listPipelines", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             hasNextPage: true,
@@ -177,7 +177,7 @@ describe("PipelineClient", () => {
 
     test("createPipeline", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "name", teamKey: "teamKey", stages: ["stages"] };
 
         server.mockEndpoint().post("/v2/pipelines").jsonBody(rawRequestBody).respondWith().statusCode(200).build();
@@ -192,7 +192,7 @@ describe("PipelineClient", () => {
 
     test("getPipeline", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             key: "key",
@@ -270,7 +270,7 @@ describe("PipelineClient", () => {
 
     test("updatePipeline", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             key: "key",
@@ -349,7 +349,7 @@ describe("PipelineClient", () => {
 
     test("deletePipeline", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { success: true, message: "message" };
 
@@ -369,7 +369,7 @@ describe("PipelineClient", () => {
 
     test("createPipelineField", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { name: "name", type: "TEXT_INPUT" };
         const rawResponseBody = {
             key: "key",

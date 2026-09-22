@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("CommentsClient", () => {
     test("listComments", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             hasNextPage: true,
@@ -44,7 +44,7 @@ describe("CommentsClient", () => {
 
     test("createComment", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { message: "message" };
         const rawResponseBody = {
             key: "key",
@@ -79,7 +79,7 @@ describe("CommentsClient", () => {
 
     test("getComment", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             key: "key",
@@ -112,7 +112,7 @@ describe("CommentsClient", () => {
 
     test("updateComment", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             key: "key",
@@ -146,7 +146,7 @@ describe("CommentsClient", () => {
 
     test("deleteComment", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { success: true, message: "message" };
 
@@ -166,7 +166,7 @@ describe("CommentsClient", () => {
 
     test("reactToComment", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { emoji: "emoji" };
         const rawResponseBody = {
             key: "key",
@@ -203,7 +203,7 @@ describe("CommentsClient", () => {
 
     test("removeCommentReaction", async () => {
         const server = mockServerPool.createServer();
-        const client = new StreakClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new StreakClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { emoji: "emoji" };
         const rawResponseBody = {
             key: "key",

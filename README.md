@@ -10,6 +10,7 @@ The Streak TypeScript library provides convenient access to the Streak APIs from
 - [Installation](#installation)
 - [Reference](#reference)
 - [Usage](#usage)
+- [Environments](#environments)
 - [Request and Response Types](#request-and-response-types)
 - [Exception Handling](#exception-handling)
 - [Advanced](#advanced)
@@ -42,10 +43,22 @@ Instantiate and use the client with the following:
 ```typescript
 import { StreakClient } from "@streakyc/streak";
 
-const client = new StreakClient({ baseUrl: "YOUR_BASE_URL" });
+const client = new StreakClient({ token: "YOUR_TOKEN" });
 await client.pipeline.updatePipelineField({
     pipelineKey: "pipelineKey",
     fieldKey: "fieldKey"
+});
+```
+
+## Environments
+
+This SDK allows you to configure different environments for API requests.
+
+```typescript
+import { StreakClient, StreakEnvironment } from "@streakyc/streak";
+
+const client = new StreakClient({
+    environment: StreakEnvironment.Default,
 });
 ```
 

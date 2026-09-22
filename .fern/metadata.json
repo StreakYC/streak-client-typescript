@@ -9,8 +9,7 @@
         }
     },
     "originGitCommit": "83b698bb0ec5a5594bc14512fc26ffece94f7df4",
-    "originGitCommitIsDirty": false,
+    "originGitCommitIsDirty": true,
     "invokedBy": "manual",
-    "requestedVersion": "0.8.0",
-    "sdkVersion": "0.8.0"
+    "sdkVersion": "0.8.1"
 }
